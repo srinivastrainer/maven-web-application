@@ -21,7 +21,7 @@
 		<spring.version>5.1.2.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<sonar.host.url>http://3.138.172.134:9000/</sonar.host.url>
+		<sonar.host.url>http://3.128.199.247:9000/</sonar.host.url>
                 <sonar.login>admin</sonar.login>
 		<sonar.password>Satya!888</sonar.password>  
               
@@ -99,13 +99,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://3.16.156.97:8081/repository/apple-release/</url>
+	      <url>http://18.222.31.220:8081/repository/apple-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://3.16.156.97:8081/repository/apple-snapshot/</url>
+	      <url>http://18.222.31.220:8081/repository/apple-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
