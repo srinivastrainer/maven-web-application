@@ -1,0 +1,54 @@
+pipeline {
+
+agent any
+triggers{
+ pollSCM('* * * * *') //No need of properties all these only pollSCM is enough.Hence removed.
+}
+options{
+    timestamps()
+buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))
+}
+tools{
+maven "maven3.6.3"
+}
+stages{
+
+ stage('CheckoutCode'){
+ steps{
+ git branch: 'development', credentialsId: '4337811d-0368-4314-a858-809d021f874b', url: 'https://github.com/srinivastrainer/maven-web-application.git'
+   }
+   }
+ stage('Build'){
+ steps{
+ sh "mvn clean package"
+   }
+   }
+ stage('ExecuteSonarQubeReport'){
+ steps{
+ sh "mvn clean sonar:sonar"
+   }
+   }
+ stage('UploadArtifactIntoNexus'){
+ steps{
+ sh "mvn clean deploy"
+   }
+   }
+ stage('DepoyAppIntoTomcatServer'){
+ steps{
+ sshagent(['23fd4af2-7196-4283-8f73-c014ee907e33']) {
+ sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.58.73.109:/opt/apache-tomcat-9.0.48/webapps/"
+  }
+  }
+  }
+} //stages closing
+post {
+ 
+ success{
+ emailext body: 'Build Completed. - Success', subject: 'Build Completed. - Success', to: 'srinivas.tns7@gmail.com,vijju14nov@gmail.com'
+ }
+ failure {
+ emailext body: 'Build Completed. - Failure', subject: 'Build Completed. - Failure', to: 'srinivas.tns7@gmail.com,vijju14nov@gmail.com'
+ }
+}
+
+}//pipeline closing
