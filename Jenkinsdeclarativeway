@@ -23,7 +23,8 @@ stages{
  sh "mvn clean package"
    }
    }
- stage('ExecuteSonarQubeReport'){
+/*
+stage('ExecuteSonarQubeReport'){
  steps{
  sh "mvn clean sonar:sonar"
    }
@@ -40,6 +41,7 @@ stages{
   }
   }
   }
+*/
 } //stages closing
 post {
  
