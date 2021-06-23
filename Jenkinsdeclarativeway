@@ -2,7 +2,7 @@ pipeline {
 
 agent any
 triggers{
- pollSCM('* * * * *') //No need of properties all these only pollSCM is enough.Hence removed.
+ pollSCM('* * * * *') //No need of properties all these only pollSCM is enough
 }
 options{
     timestamps()
